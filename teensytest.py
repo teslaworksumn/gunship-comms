@@ -3,7 +3,7 @@ import sys
 import struct
 import time
 
-debug = {'SerialBuffer':False, 'RXWarning':False}
+debug = {'SerialBuffer':False, 'RXWarning':True}
 
 if sys.version_info > (3,0):
     py2 = False
@@ -36,7 +36,7 @@ while True:
             rx = b''
             si = 0
             for i in serialbuffer: # Find the start byte
-                if i != 0x01:
+                if i != 120:
                     si += 1
                 else:
                     break
@@ -53,7 +53,7 @@ while True:
             traceback.print_tb(e[2])
             sys.stderr.write('Data in queue: {0}\n'.format(serialbuffer))
         print(serialbuffer)
-        time.sleep(0.01)
+        time.sleep(0.05)
     except (KeyboardInterrupt,SystemExit):
         break;
 
