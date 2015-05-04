@@ -21,11 +21,10 @@ while True:
     try:
         serialbuffer = []
         rx = b''
-        ss = "x {0} 1 2 3 4 5 6 7".format(out)
+        ss = "x {0} 1 {1} 3 4 5 6 7".format(out,255-out)
         port.write(ss.encode())
         print(ss)
         out = (out+1)%256
-        print(out)
         try:
             if port.inWaiting() > 0:
                 rx += port.read(port.inWaiting()) # Read the buffer into a variable
