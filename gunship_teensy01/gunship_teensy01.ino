@@ -19,8 +19,8 @@
 #define DATA_SIZE 8
 #define THRUST_PIN A14
 #define RUDDER_PIN 6
-#define LVW 15
-#define LED 13
+#define LVW_PIN 15
+#define LED_PIN 13
 
 int data[] = {127,127,0,127,127,0,0,0};
 
@@ -29,8 +29,8 @@ void setup() {
   analogWriteResolution(8);
   pinMode(THRUST_PIN, OUTPUT);
   pinMode(RUDDER_PIN, OUTPUT);
-  pinMode(LVW, INPUT);
-  pinMode(LED, OUTPUT);
+  pinMode(LVW_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
@@ -43,6 +43,10 @@ void loop() {
           break;
         }
       }
+      digitalWrite(LED_PIN,HIGH);
+      delay(25);
+      digitalWrite(LED_PIN,LOW);
+      delay(25);
     }
   }
   
@@ -51,19 +55,14 @@ void loop() {
   
   Serial2.write('x');
   Serial2.write(' ');
-  if (digitalRead(LVW) == HIGH) {
+  if (digitalRead(LVW_PIN) == HIGH) {
     Serial2.print('0');
-    digitalWrite(LED,LOW);
+    digitalWrite(LED_PIN,LOW);
   } else {
     Serial2.print('1');
-    digitalWrite(LED,HIGH);
+    digitalWrite(LED_PIN,HIGH);
   }
   Serial2.write('\c');
   Serial2.write('\n');
-  
-  digitalWrite(LED,HIGH);
-  delay(25);
-  digitalWrite(LED,LOW);
-  delay(25);
 }
   
