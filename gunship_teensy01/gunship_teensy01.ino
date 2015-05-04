@@ -20,6 +20,7 @@
 #define THRUST_PIN A14
 #define RUDDER_PIN 6
 #define LVW 15
+#define LED 13
 
 int data[] = {127,127,0,127,127,0,0,0};
 
@@ -29,7 +30,7 @@ void setup() {
   pinMode(THRUST_PIN, OUTPUT);
   pinMode(RUDDER_PIN, OUTPUT);
   pinMode(LVW, INPUT);
-  pinMode(13, OUTPUT);
+  pinMode(LED, OUTPUT);
 }
 
 void loop() {
@@ -45,24 +46,24 @@ void loop() {
     }
   }
   
-  analogWrite(A14, data[0]);
-  analogWrite(6, data[1]);
+  analogWrite(THRUST_PIN, data[0]);
+  analogWrite(RUDDER_PIN, data[1]);
   
   Serial2.write('x');
   Serial2.write(' ');
-  if (digitalRead(15) == HIGH) {
+  if (digitalRead(LVW) == HIGH) {
     Serial2.print('0');
-    digitalWrite(13,LOW);
+    digitalWrite(LED,LOW);
   } else {
     Serial2.print('1');
-    digitalWrite(13,HIGH);
+    digitalWrite(LED,HIGH);
   }
   Serial2.write('\c');
   Serial2.write('\n');
   
-  digitalWrite(13,HIGH);
+  digitalWrite(LED,HIGH);
   delay(25);
-  digitalWrite(13,LOW);
+  digitalWrite(LED,LOW);
   delay(25);
 }
   
