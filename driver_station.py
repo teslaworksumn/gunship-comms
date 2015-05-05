@@ -70,7 +70,6 @@ def run():
             turret[2] = 59
         if joy[0]['button'][30]:
             turret[2] = 79
-        print joy[0]['button']
         print "Thrust: {0}, Rudder: {1}, Lift: {2}".format(thrust,rudder,lift)
         print "Turret theta: {0}, phi: {1}, safety: {2}, active {3}".format(turret[0],turret[1],turret_safety,turret[2])
         if frame != []:

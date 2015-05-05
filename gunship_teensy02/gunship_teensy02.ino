@@ -63,10 +63,6 @@ void loop() {
           break;
         }
       }
-      digitalWrite(LED_PIN, HIGH);
-      delay(25);
-      digitalWrite(LED_PIN, LOW);
-      delay(25);
     }
   }
   if (data[5] == 37) {

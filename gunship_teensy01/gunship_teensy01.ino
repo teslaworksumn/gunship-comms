@@ -50,10 +50,6 @@ void loop() {
           break;
         }
       }
-      digitalWrite(LED_PIN,HIGH);
-      delay(15);
-      digitalWrite(LED_PIN,LOW);
-      delay(15);
     }
   }
   
@@ -64,10 +60,8 @@ void loop() {
   Serial2.write(' ');
   if (digitalRead(LVW_PIN) == HIGH) {
     Serial2.print('0');
-    digitalWrite(LED_PIN,LOW);
   } else {
     Serial2.print('1');
-    digitalWrite(LED_PIN,HIGH);
   }
   Serial2.write('\r');
   Serial2.write('\n');
