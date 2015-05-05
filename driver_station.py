@@ -54,7 +54,7 @@ def run():
         lift   = int((-joy[0]['axis'][3]+1)*127.5)
         turret_d = joy[0]['hat'][0]
         turret_v = int((joy[0]['axis'][6]+1)*64)
-        turret = (turret_d[0]*turret_v+127, turret_d[1]*turret_v+127)
+        turret = [turret_d[0]*turret_v+127, turret_d[1]*turret_v+127, 0]
         turret_safety = [0,0,0]
         if joy[0]['button'][5]:
             turret_safety[0] = 37
@@ -62,13 +62,21 @@ def run():
             turret_safety[1] = 97
         if joy[0]['button'][1]:
             turret_safety[2] = 123
-
+        if joy[0]['button'][23]:
+            turret[2] = 19
+        if joy[0]['button'][24]:
+            turret[2] = 43
+        if joy[0]['button'][25]:
+            turret[2] = 59
+        if joy[0]['button'][30]:
+            turret[2] = 79
+        print joy[0]['button']
         print "Thrust: {0}, Rudder: {1}, Lift: {2}".format(thrust,rudder,lift)
-        print "Turret theta: {0}, phi: {1}, safety: {2}".format(turret[0],turret[1],turret_safety)
+        print "Turret theta: {0}, phi: {1}, safety: {2}, active {3}".format(turret[0],turret[1],turret_safety,turret[2])
         if frame != []:
             if frame[0] > 0:
                 print "WARNING: LOW BATTERY!!!!!"
-        tx = [thrust,rudder,lift,turret[0],turret[1]] + turret_safety
+        tx = [thrust,rudder,lift,turret[0],turret[1]] + turret_safety + [turret[2]]
         send(tx)
         time.sleep(0.01)
 
