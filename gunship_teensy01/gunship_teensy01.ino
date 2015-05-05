@@ -2,13 +2,20 @@
  * warning to the BB.
  * Data format: { thrust[0-255], rudder[0-255], lift[0-255],
  *                turret_t[0-255], turret_p[0-255],
- *                fire0[0/37], fire1[0/97], fire2[0/123] }
+ *                fire0[0/37], fire1[0/97], fire2[0/123], 
+ *                firectl[0,19,43,59,79]}
  *  
  *  [0-255] means value is between 0 and 255 inclusive
  *  [0/1/2] means that the value is 0 or 1 or 2
  *  
  *  To fire the turret, all three safetys must be high
  *  To move the turret, fire0 must be high
+ *  FireCTL dictates which turret is to be fired:
+ *   - 00: none
+ *   - 19: Turret 1
+ *   - 43: Turret 2
+ *   - 59: Turret 3
+ *   - 79: FIRE ALL!
  *  
  * PINS:
  *   Thrust: A14 (DAC)
@@ -16,13 +23,13 @@
  *   Low-Voltage warning (input): 15 (A1) (HIGH means voltage OK)
  */
 
-#define DATA_SIZE 8
+#define DATA_SIZE 9
 #define THRUST_PIN A14
 #define RUDDER_PIN 6
 #define LVW_PIN 15
 #define LED_PIN 13
 
-int data[] = {127,127,0,127,127,0,0,0};
+int data[] = {127,127,0,127,127,0,0,0,0};
 
 void setup() {
   Serial2.begin(115200);
@@ -62,7 +69,7 @@ void loop() {
     Serial2.print('1');
     digitalWrite(LED_PIN,HIGH);
   }
-  Serial2.write('\c');
+  Serial2.write('\r');
   Serial2.write('\n');
 }
   
