@@ -51,9 +51,9 @@ void loop() {
         }
       }
       digitalWrite(LED_PIN,HIGH);
-      delay(25);
+      delay(15);
       digitalWrite(LED_PIN,LOW);
-      delay(25);
+      delay(15);
     }
   }
   

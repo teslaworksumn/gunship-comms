@@ -2,7 +2,7 @@ import sys
 import os
 import time
 import pygame
-sys.path.append("../EnttecUsbDmxPro/")
+sys.path.append("../enttec-usb-dmx-pro/")
 import EnttecUsbDmxPro
 pygame.init()
 print '%s joystick(s) found.' % pygame.joystick.get_count()
