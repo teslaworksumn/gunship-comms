@@ -2,6 +2,7 @@ import serial
 import sys
 import struct
 import time
+import array
 
 debug = {'SerialBuffer':False, 'RXWarning':True}
 
@@ -22,7 +23,7 @@ while True:
         serialbuffer = []
         rx = b''
         ss = "x {0} 1 {1} 3 4 5 6 7".format(out,255-out)
-        port.write(ss.encode())
+        port.write(ss+'\r\n'.encode())
         print(ss)
         out = (out+1)%256
         try:
@@ -51,7 +52,7 @@ while True:
             sys.stderr.write('RX_FAIL: {0}: {1}\n'.format(e[0],e[1]))
             traceback.print_tb(e[2])
             sys.stderr.write('Data in queue: {0}\n'.format(serialbuffer))
-        print(serialbuffer)
+        print(str(array.array('B',serialbuffer).tostring()))
         time.sleep(0.05)
     except (KeyboardInterrupt,SystemExit):
         break;
