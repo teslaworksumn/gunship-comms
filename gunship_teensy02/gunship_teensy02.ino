@@ -81,7 +81,7 @@ void loop() {
     fire[3] = false;
   }
   
-  analogWrite(A14, data[2]);
+  analogWrite(LIFT_PIN, data[2]);
   if (fire[0]) {
     analogWrite(TURRET_THETA_PIN, data[3]);
     analogWrite(TURRET_PHI_PIN, data[4]);
